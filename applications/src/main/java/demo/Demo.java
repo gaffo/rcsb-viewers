@@ -15,9 +15,9 @@ public class Demo {
 
 	public static void main(String[] args){
 
-					//showSimpleViewer();
-	    // showProteinWorkshop();
-		  showLigandExplorer();
+	    //showSimpleViewer();
+	     showProteinWorkshop();
+		// showLigandExplorer();
 		//showKiosk();
 	}
 
@@ -25,8 +25,8 @@ public class Demo {
 
 	public static void showSimpleViewer(){
 
-	//	String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/1STP.xml.gz","-unit_id","1","-standalone", "-cAlphaFlag"};
-		String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/1M4X.xml.gz","-unit_id","1","-standalone", "-cAlphaFlag"};
+		String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/1STP.xml.gz","-unit_id","1","-standalone", "-cAlphaFlag"};
+	//	String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/1M4X.xml.gz","-unit_id","1","-standalone", "-cAlphaFlag"};
 	//	String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/1HNW.xml.gz","-unit_id","1","-standalone", "-cAlphaFlag"}; // ribosome
 	//	String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/2mo2.xml.gz","-unit_id","1","-standalone", "-cAlphaFlag"}; // dna
 	//	String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/2CSE.xml.gz","-unit_id","1","-standalone", "-cAlphaFlag"};
