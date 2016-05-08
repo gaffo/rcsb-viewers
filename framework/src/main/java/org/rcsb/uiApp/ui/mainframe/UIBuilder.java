@@ -45,18 +45,13 @@
  */ 
 package org.rcsb.uiApp.ui.mainframe;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
-import javax.swing.JFileChooser;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
 import org.rcsb.mbt.model.util.Status;
@@ -102,6 +97,11 @@ public class UIBuilder implements Runnable
 				final JMenuItem openFileItem = new JMenuItem("Open File...");
 				final JMenuItem openUrlItem = new JMenuItem("Open URL...");
 				final JMenuItem openPdbIdItem = new JMenuItem("Open PDB ID...");
+				final JMenuItem nextInSheet = new JMenuItem("Next");
+				nextInSheet.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK));
+				nextInSheet.addActionListener(i -> {
+					JOptionPane.showMessageDialog(null, "Next");
+				});
 				final JMenuItem exitItem = new JMenuItem("Exit");
 
 				openFileItem.addActionListener(
@@ -227,6 +227,7 @@ public class UIBuilder implements Runnable
 				fileMenu.add(openFileItem);
 				fileMenu.add(openUrlItem);
 				fileMenu.add(openPdbIdItem);
+				fileMenu.add(nextInSheet);
 				fileMenuPreSeparatorIX = fileMenu.getItemCount();
 				fileMenu.addSeparator();
 				fileMenu.add(exitItem);
