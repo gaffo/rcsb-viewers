@@ -718,7 +718,7 @@ public class LigandSideBar extends JPanel
 			// set colors and initial state
 			this.setBackground(LXDocumentFrame.sidebarColor);
 			hydrophilicBox.setBackground(LXDocumentFrame.sidebarColor);
-			hydrophilicBox.setSelected(false);
+			hydrophilicBox.setSelected(true);
 			hydrophobicBox.setBackground(LXDocumentFrame.sidebarColor);
 			hydrophobicBox.setSelected(false);
 			otherBox.setBackground(LXDocumentFrame.sidebarColor);

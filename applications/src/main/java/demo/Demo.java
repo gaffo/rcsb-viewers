@@ -46,7 +46,7 @@ public class Demo {
 
     public static void showLigandExplorer() {
         System.out.println("Showing Ligand Explorer");
-        String[] args = new String[]{"-structure_url", "http://www.rcsb.org/pdb/files/2HYY.xml.gz", "-unit_id", "1", "-standalone"};
+        String[] args = new String[]{"-structure_url", "http://www.rcsb.org/pdb/files/4HEE.xml.gz", "-unit_id", "1", "-standalone"};
 //		String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/1STP.xml.gz","-unit_id","1","-standalone"};
 //		String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/2YOK.xml.gz","-unit_id","1","-standalone"};
 //		String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/4FQC.xml.gz","-unit_id","1","-standalone"};
