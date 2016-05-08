@@ -1,11 +1,16 @@
 package demo;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.rcsb.ks.controllers.app.SlideShow;
 import org.rcsb.lx.controllers.app.LigandExplorer;
 import org.rcsb.pw.controllers.app.ProteinWorkshop;
 import org.rcsb.sv.controllers.app.SimpleViewer;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+
 public class Demo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InvalidFormatException {
         //showSimpleViewer();
         // showProteinWorkshop();
         showLigandExplorer();
@@ -44,9 +49,12 @@ public class Demo {
         app.initialize(true, true);
     }
 
-    public static void showLigandExplorer() {
+    public static void showLigandExplorer() throws IOException, InvalidFormatException {
+        Nextinator.init();
+        String pdb = Nextinator.get().nextPDBId();
+
         System.out.println("Showing Ligand Explorer");
-        String[] args = new String[]{"-structure_url", "http://www.rcsb.org/pdb/files/4HEE.xml.gz", "-unit_id", "1", "-standalone"};
+        String[] args = new String[]{"-structure_url", "http://www.rcsb.org/pdb/files/" + pdb + ".xml.gz", "-unit_id", "1", "-standalone"};
 //		String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/1STP.xml.gz","-unit_id","1","-standalone"};
 //		String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/2YOK.xml.gz","-unit_id","1","-standalone"};
 //		String[] args = new String[]{"-structure_url","http://www.rcsb.org/pdb/files/4FQC.xml.gz","-unit_id","1","-standalone"};
