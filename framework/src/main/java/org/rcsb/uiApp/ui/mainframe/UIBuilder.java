@@ -101,6 +101,12 @@ public class UIBuilder implements Runnable
 				final JMenuItem openUrlItem = new JMenuItem("Open URL...");
 				final JMenuItem openPdbIdItem = new JMenuItem("Open PDB ID...");
 
+				final JMenuItem skipItem = new JMenuItem("Skip");
+				skipItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK));
+				skipItem.addActionListener(l -> {
+					next();
+				});
+
 				final JMenuItem noItem = new JMenuItem("No, Next");
 				noItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK));
 				noItem.addActionListener(i -> {
@@ -111,14 +117,7 @@ public class UIBuilder implements Runnable
 					} catch (InvalidFormatException e) {
 						e.printStackTrace();
 					}
-
-					String next = Nextinator.get().nextPDBId();
-					if (next == null) {
-						JOptionPane.showMessageDialog(null, "That's all folks!");
-						System.exit(0);
-					}
-					LoadThread loadIt = new LoadThread("http://www.rcsb.org/pdb/files/" + next + ".xml.gz");
-					SwingUtilities.invokeLater(loadIt);
+					next();
 				});
 
 				final JMenuItem yesItem = new JMenuItem("");
@@ -136,13 +135,7 @@ public class UIBuilder implements Runnable
 					} catch (InvalidFormatException e) {
 						e.printStackTrace();
 					}
-					String next = Nextinator.get().nextPDBId();
-					if (next == null) {
-						JOptionPane.showMessageDialog(null, "That's all folks!");
-						System.exit(0);
-					}
-					LoadThread loadIt = new LoadThread("http://www.rcsb.org/pdb/files/" + next + ".xml.gz");
-					SwingUtilities.invokeLater(loadIt);
+					next();
 				});
 
 
@@ -273,6 +266,7 @@ public class UIBuilder implements Runnable
 //				fileMenu.add(openPdbIdItem);
 				fileMenu.add(noItem);
 				fileMenu.add(yesItem);
+				fileMenu.add(skipItem);
 				fileMenuPreSeparatorIX = fileMenu.getItemCount();
 				fileMenu.addSeparator();
 				fileMenu.add(exitItem);
@@ -289,7 +283,17 @@ public class UIBuilder implements Runnable
 			}
 		}
 	}
-	
+
+	private void next() {
+		String next = Nextinator.get().nextPDBId();
+		if (next == null) {
+            JOptionPane.showMessageDialog(null, "That's all folks!");
+            System.exit(0);
+        }
+		LoadThread loadIt = new LoadThread("http://www.rcsb.org/pdb/files/" + next + ".xml.gz");
+		SwingUtilities.invokeLater(loadIt);
+	}
+
 	/**
 	 * Insert a menu item before the specified item.  Helps keep the menu list ordered
 	 * reasonably.
