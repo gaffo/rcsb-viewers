@@ -50,10 +50,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.gaffney.Nextinator;
 import org.rcsb.mbt.model.util.Status;
 import org.rcsb.uiApp.controllers.app.AppBase;
 import org.rcsb.uiApp.controllers.doc.LoadThread;
@@ -97,11 +100,52 @@ public class UIBuilder implements Runnable
 				final JMenuItem openFileItem = new JMenuItem("Open File...");
 				final JMenuItem openUrlItem = new JMenuItem("Open URL...");
 				final JMenuItem openPdbIdItem = new JMenuItem("Open PDB ID...");
-				final JMenuItem nextInSheet = new JMenuItem("Next");
-				nextInSheet.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK));
-				nextInSheet.addActionListener(i -> {
-					JOptionPane.showMessageDialog(null, "Next");
+
+				final JMenuItem noItem = new JMenuItem("No, Next");
+				noItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK));
+				noItem.addActionListener(i -> {
+					try {
+						Nextinator.get().setValue("NO", "");
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (InvalidFormatException e) {
+						e.printStackTrace();
+					}
+
+					String next = Nextinator.get().nextPDBId();
+					if (next == null) {
+						JOptionPane.showMessageDialog(null, "That's all folks!");
+						System.exit(0);
+					}
+					LoadThread loadIt = new LoadThread("http://www.rcsb.org/pdb/files/" + next + ".xml.gz");
+					SwingUtilities.invokeLater(loadIt);
 				});
+
+				final JMenuItem yesItem = new JMenuItem("");
+				yesItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Event.CTRL_MASK));
+				yesItem.addActionListener(l -> {
+					String s = (String)JOptionPane.showInputDialog(
+							null,
+							"Enter Comments",
+							"Enter Comments",
+							JOptionPane.PLAIN_MESSAGE);
+					try {
+						Nextinator.get().setValue("YES", s);
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (InvalidFormatException e) {
+						e.printStackTrace();
+					}
+					String next = Nextinator.get().nextPDBId();
+					if (next == null) {
+						JOptionPane.showMessageDialog(null, "That's all folks!");
+						System.exit(0);
+					}
+					LoadThread loadIt = new LoadThread("http://www.rcsb.org/pdb/files/" + next + ".xml.gz");
+					SwingUtilities.invokeLater(loadIt);
+				});
+
+
 				final JMenuItem exitItem = new JMenuItem("Exit");
 
 				openFileItem.addActionListener(
@@ -224,10 +268,11 @@ public class UIBuilder implements Runnable
 					}
 				);
 
-				fileMenu.add(openFileItem);
-				fileMenu.add(openUrlItem);
-				fileMenu.add(openPdbIdItem);
-				fileMenu.add(nextInSheet);
+//				fileMenu.add(openFileItem);
+//				fileMenu.add(openUrlItem);
+//				fileMenu.add(openPdbIdItem);
+				fileMenu.add(noItem);
+				fileMenu.add(yesItem);
 				fileMenuPreSeparatorIX = fileMenu.getItemCount();
 				fileMenu.addSeparator();
 				fileMenu.add(exitItem);

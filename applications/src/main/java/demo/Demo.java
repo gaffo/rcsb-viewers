@@ -1,12 +1,11 @@
 package demo;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.gaffney.Nextinator;
 import org.rcsb.ks.controllers.app.SlideShow;
 import org.rcsb.lx.controllers.app.LigandExplorer;
 import org.rcsb.pw.controllers.app.ProteinWorkshop;
 import org.rcsb.sv.controllers.app.SimpleViewer;
 
-import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 
 public class Demo {

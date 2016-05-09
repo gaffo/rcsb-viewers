@@ -73,6 +73,16 @@
             <artifactId>jogl-all-main</artifactId>
             <version>${jogl.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.15-beta1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.15-beta1</version>
+        </dependency>
     </dependencies>
     <profiles>
         <!-- Note: before you can use this build profile you need to set up an
