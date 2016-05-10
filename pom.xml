@@ -6,7 +6,7 @@
     <version>4.7.9-SNAPSHOT</version>
     <properties>
         <jogl.version>2.3.1</jogl.version>
-        <jdk.version>1.6</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
         <maxmem>500M</maxmem>
