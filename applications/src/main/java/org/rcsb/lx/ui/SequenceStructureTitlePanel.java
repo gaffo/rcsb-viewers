@@ -54,6 +54,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import org.rcsb.mbt.model.Structure;
+import org.rcsb.mbt.model.StructureMap;
 import org.rcsb.vf.glscene.jogl.SequencePanelBase;
 
 
@@ -65,8 +66,13 @@ public class SequenceStructureTitlePanel extends SequencePanelBase
 	
 	public SequenceStructureTitlePanel(Structure struc)
 	{
-
-		title = "Structure: " + struc.getStructureMap().getPdbId();
+		StructureMap structureMap = struc.getStructureMap();
+		String pdbId = structureMap.getPdbId();
+		String extra = "";
+		for (String value: structureMap.getEntityNameMap().values()) {
+			extra += "; " + value;
+		}
+		title = "Structure:" + pdbId + ": " + extra;
 	}
 
 	@Override
