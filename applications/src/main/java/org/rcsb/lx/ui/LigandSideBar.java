@@ -77,6 +77,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import org.gaffney.Nextinator;
 import org.rcsb.lx.controllers.app.LigandExplorer;
 import org.rcsb.lx.model.InteractionConstants;
 import org.rcsb.mbt.model.Bird;
@@ -775,7 +776,11 @@ public class LigandSideBar extends JPanel
 	 */
 	public void selectInitialLigand()
 	{
-		String initialLigand = LigandExplorer.sgetModel().getInitialLigand();
+		String nextinatorLigand = Nextinator.get().ligandId();
+		String initialLigand = nextinatorLigand;
+		if (initialLigand == null || "".equals(initialLigand)) {
+			initialLigand = LigandExplorer.sgetModel().getInitialLigand();
+		}
 		DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode)ligandJList.getModel().getRoot();
 		TreePath paths[] = null;
 

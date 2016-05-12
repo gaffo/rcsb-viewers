@@ -166,6 +166,12 @@ public class Nextinator {
         return cell.getStringCellValue();
     }
 
+    public String ligandId() {
+        Row row = sheet.getRow(currentRow);
+        Cell cell = row.getCell(0);
+        return cell.getStringCellValue();
+    }
+
     public void setValue(String value, String comment) throws IOException, InvalidFormatException {
         Row row = sheet.getRow(currentRow);
         row.getCell(OUTPUT_COLUMN, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(value);
